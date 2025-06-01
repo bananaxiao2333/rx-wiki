@@ -199,12 +199,18 @@ export default function Sidebar() {
                         key={itemIndex}
                         component="a"
                         href={"/" + type + "/" + item}
+                        sx={{ textDecoration: "inherit" }}
                       >
                         <img
                           src={wikiData[type].childrens[item].icon}
-                          width={25}
+                          width={23}
+                          style={{ zIndex: "1000" }}
                         />
-                        <ListItemButton>{item}</ListItemButton>
+                        <ListItemButton
+                          sx={{ color: wikiData[type].childrens[item].color }}
+                        >
+                          {item}
+                        </ListItemButton>
                       </ListItem>
                     )
                   )}

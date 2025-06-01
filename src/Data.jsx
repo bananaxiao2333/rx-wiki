@@ -6,6 +6,7 @@ const wikiData = {
     childrens: {
       "Class-D": {
         icon: "/img/class_d.png",
+        color: "#ff8200",
       },
     },
   },
