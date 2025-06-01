@@ -10,6 +10,7 @@ import wikiData from "./Data";
 import Home from "./Home";
 import RouterBreadcrumbs from "./components/Path.jsx";
 import HomeHero from "./components/HomeHero.jsx";
+import About from "./About.jsx";
 
 //TODO: change black to grey black background theme
 
@@ -49,7 +50,15 @@ createRoot(document.getElementById("root")).render(
                   </Box>
                 }
               />
-              <Route path="/about" element={<RouterBreadcrumbs />} />
+              <Route
+                path="/about"
+                element={
+                  <Box>
+                    <RouterBreadcrumbs />
+                    <About />
+                  </Box>
+                }
+              />
               <Route path="/siteIndex" element={<RouterBreadcrumbs />} />
               {Object.keys(wikiData).map((type, typeIndex) =>
                 Object.keys(wikiData[type].childrens).map((camp, campIndex) => (

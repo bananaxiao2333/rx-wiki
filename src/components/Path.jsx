@@ -9,6 +9,7 @@ import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import Breadcrumbs from "@mui/joy/Breadcrumbs";
 import { Link as RouterLink, useLocation } from "react-router";
+import { HomeOutlined } from "@mui/icons-material";
 
 const breadcrumbNameMap = {
   "/about": "About",
@@ -52,6 +53,7 @@ function Page() {
   return (
     <Breadcrumbs aria-label="breadcrumb">
       <LinkRouter underline="hover" color="inherit" to="/">
+        <HomeOutlined />
         Home
       </LinkRouter>
       {pathnames.map((value, index) => {

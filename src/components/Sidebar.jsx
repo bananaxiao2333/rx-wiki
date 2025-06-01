@@ -252,17 +252,8 @@ export default function Sidebar() {
           >
             <Typography level="title-sm">Warning</Typography>
           </Stack>
-          <Typography level="body-xs">
-            RXWIKI is under construction!
-            <br />
-            Project progress:
-          </Typography>
-          <LinearProgress
-            variant="outlined"
-            value={15}
-            determinate
-            sx={{ my: 1 }}
-          />
+          <Typography level="body-xs">RXWIKI is under construction!</Typography>
+          <LinearProgress variant="outlined" sx={{ my: 1 }} />
         </Card>
       </Box>
       <Divider />
