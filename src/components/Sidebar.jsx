@@ -102,15 +102,17 @@ export default function Sidebar() {
         }}
         onClick={() => closeSidebar()}
       />
-      <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
-        <IconButton variant="soft" color="primary" size="sm">
-          <img src={RxwikiIcon} width={30} />
-        </IconButton>
-        <Typography level="title-lg">RXWIKI</Typography>
-        <CssVarsProvider>
-          <ColorSchemeToggle sx={{ ml: "auto" }} />
-        </CssVarsProvider>
-      </Box>
+      <a href="/" style={{ textDecoration: "none" }}>
+        <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
+          <IconButton variant="soft" color="primary" size="sm">
+            <img src={RxwikiIcon} width={30} />
+          </IconButton>
+          <Typography level="title-lg">RXWIKI</Typography>
+          <CssVarsProvider>
+            <ColorSchemeToggle sx={{ ml: "auto" }} />
+          </CssVarsProvider>
+        </Box>{" "}
+      </a>
       <Input
         size="sm"
         startDecorator={<SearchRoundedIcon />}
@@ -155,7 +157,7 @@ export default function Sidebar() {
           </ListItem>
 
           <ListItem>
-            <ListItemButton role="menuitem" component="a" href="/index">
+            <ListItemButton role="menuitem" component="a" href="/siteIndex">
               <ListRounded />
               <ListItemContent>
                 <Typography level="title-sm">Index</Typography>

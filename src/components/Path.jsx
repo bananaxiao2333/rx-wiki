@@ -12,7 +12,7 @@ import { Link as RouterLink, useLocation } from "react-router";
 
 const breadcrumbNameMap = {
   "/about": "About",
-  "/index": "Index",
+  "/siteIndex": "Index",
 };
 
 function ListItemLink(props) {

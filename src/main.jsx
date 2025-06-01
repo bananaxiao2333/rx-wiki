@@ -39,7 +39,7 @@ createRoot(document.getElementById("root")).render(
             <Routes>
               <Route path="/" element={<RouterBreadcrumbs />} />
               <Route path="/about" element={<RouterBreadcrumbs />} />
-              <Route path="/index" element={<RouterBreadcrumbs />} />
+              <Route path="/siteIndex" element={<RouterBreadcrumbs />} />
               {Object.keys(wikiData).map((type, typeIndex) =>
                 Object.keys(wikiData[type].childrens).map((camp, campIndex) => (
                   <>
