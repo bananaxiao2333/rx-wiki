@@ -207,7 +207,10 @@ export default function Sidebar() {
                           style={{ zIndex: "1000" }}
                         />
                         <ListItemButton
-                          sx={{ color: wikiData[type].childrens[item].color }}
+                          sx={{
+                            color:
+                              wikiData[type].childrens[item].color ?? "inherit",
+                          }}
                         >
                           {item}
                         </ListItemButton>
