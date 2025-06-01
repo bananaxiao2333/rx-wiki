@@ -21,9 +21,10 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import RxwikiIcon from "../assets/rxwiki-icon.svg";
 
 import { closeSidebar } from "./utils";
-import { InfoRounded, ListRounded } from "@mui/icons-material";
+import { AllOutRounded, InfoRounded, ListRounded } from "@mui/icons-material";
 import ColorSchemeToggle from "./ColorSchemeToggle";
-import { CssVarsProvider } from "@mui/joy";
+import { CssVarsProvider, ListDivider } from "@mui/joy";
+import wikiData from "../Data";
 
 function Toggler({ defaultExpanded = false, renderToggle, children }) {
   const [open, setOpen] = React.useState(defaultExpanded);
@@ -136,7 +137,7 @@ export default function Sidebar() {
           }}
         >
           <ListItem>
-            <ListItemButton>
+            <ListItemButton role="menuitem" component="a" href="/">
               <HomeRoundedIcon />
               <ListItemContent>
                 <Typography level="title-sm">Home</Typography>
@@ -145,7 +146,7 @@ export default function Sidebar() {
           </ListItem>
 
           <ListItem>
-            <ListItemButton>
+            <ListItemButton role="menuitem" component="a" href="/about">
               <InfoRounded />
               <ListItemContent>
                 <Typography level="title-sm">About</Typography>
@@ -154,7 +155,7 @@ export default function Sidebar() {
           </ListItem>
 
           <ListItem>
-            <ListItemButton selected>
+            <ListItemButton role="menuitem" component="a" href="/index">
               <ListRounded />
               <ListItemContent>
                 <Typography level="title-sm">Index</Typography>
@@ -162,44 +163,53 @@ export default function Sidebar() {
             </ListItemButton>
           </ListItem>
 
-          <ListItem nested>
-            <Toggler
-              renderToggle={({ open, setOpen }) => (
-                <ListItemButton onClick={() => setOpen(!open)}>
-                  <AssignmentRoundedIcon />
-                  <ListItemContent>
-                    <Typography level="title-sm">Tasks</Typography>
-                  </ListItemContent>
-                  <KeyboardArrowDownIcon
-                    sx={[
-                      open
-                        ? {
-                            transform: "rotate(180deg)",
-                          }
-                        : {
-                            transform: "none",
-                          },
-                    ]}
-                  />
-                </ListItemButton>
-              )}
-            >
-              <List sx={{ gap: 0.5 }}>
-                <ListItem sx={{ mt: 0.5 }}>
-                  <ListItemButton>All tasks</ListItemButton>
-                </ListItem>
-                <ListItem>
-                  <ListItemButton>Backlog</ListItemButton>
-                </ListItem>
-                <ListItem>
-                  <ListItemButton>In progress</ListItemButton>
-                </ListItem>
-                <ListItem>
-                  <ListItemButton>Done</ListItemButton>
-                </ListItem>
-              </List>
-            </Toggler>
-          </ListItem>
+          <ListDivider />
+
+          {Object.keys(wikiData).map((type, index) => (
+            // this layer is for factions or items etc
+            <ListItem nested key={index}>
+              <Toggler
+                renderToggle={({ open, setOpen }) => (
+                  <ListItemButton onClick={() => setOpen(!open)}>
+                    {wikiData[type].icon}
+                    <ListItemContent>
+                      <Typography level="title-sm">{type}</Typography>
+                    </ListItemContent>
+                    <KeyboardArrowDownIcon
+                      sx={[
+                        open
+                          ? {
+                              transform: "rotate(180deg)",
+                            }
+                          : {
+                              transform: "none",
+                            },
+                      ]}
+                    />
+                  </ListItemButton>
+                )}
+              >
+                <List sx={{ gap: 0.5 }}>
+                  {Object.keys(wikiData[type].childrens).map(
+                    // this layer is for items like class-d
+                    (item, itemIndex) => (
+                      <ListItem
+                        key={itemIndex}
+                        component="a"
+                        href={"/" + type + "/" + item}
+                      >
+                        <img
+                          src={wikiData[type].childrens[item].icon}
+                          width={25}
+                        />
+                        <ListItemButton>{item}</ListItemButton>
+                      </ListItem>
+                    )
+                  )}
+                </List>
+              </Toggler>
+            </ListItem>
+          ))}
         </List>
         <List
           size="sm"
