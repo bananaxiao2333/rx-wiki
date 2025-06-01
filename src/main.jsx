@@ -11,6 +11,8 @@ import Home from "./Home";
 import RouterBreadcrumbs from "./components/Path.jsx";
 import HomeHero from "./components/HomeHero.jsx";
 
+//TODO: change black to grey black background theme
+
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <CssBaseline>

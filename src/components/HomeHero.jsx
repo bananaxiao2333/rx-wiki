@@ -3,7 +3,6 @@ import Button from "@mui/joy/Button";
 import Link from "@mui/joy/Link";
 import Typography from "@mui/joy/Typography";
 import ArrowForward from "@mui/icons-material/ArrowForward";
-import TwoSidedLayout from "./TwoSidedLayout";
 import { Box } from "@mui/joy";
 
 export default function HomeHero() {
@@ -42,8 +41,14 @@ export default function HomeHero() {
           Get Started
         </Button>
         <Typography>
+          <br />
           View the materials directly?{" "}
-          <Link sx={{ fontWeight: "lg" }}>Index Page</Link>
+          <Link
+            onClick={() => (window.location = "/siteIndex")}
+            sx={{ fontWeight: "lg" }}
+          >
+            Index Page
+          </Link>
         </Typography>
       </Box>
       <Box
