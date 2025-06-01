@@ -2,16 +2,59 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App.jsx";
 import "@fontsource/inter";
-import { CssBaseline } from "@mui/joy";
+import { Box, CssBaseline } from "@mui/joy";
 import Sidebar from "./components/Sidebar.jsx";
 import Topbar from "./components/Topbar.jsx";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import wikiData from "./Data";
+import Home from "./Home";
+import RouterBreadcrumbs from "./components/Path.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <CssBaseline>
-      <Sidebar />
-      <Topbar />
-      <App />
+      <Box sx={{ display: "flex", minHeight: "100dvh" }}>
+        <Sidebar />
+        <Topbar />
+        <Box
+          component="main"
+          className="MainContent"
+          sx={{
+            px: { xs: 2, md: 6 },
+            pt: {
+              xs: "calc(12px + var(--Header-height))",
+              sm: "calc(12px + var(--Header-height))",
+              md: 3,
+            },
+            pb: { xs: 2, sm: 2, md: 3 },
+            flex: 1,
+            display: "flex",
+            flexDirection: "column",
+            minWidth: 0,
+            height: "100dvh",
+            gap: 1,
+          }}
+        >
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<RouterBreadcrumbs />} />
+              <Route path="/about" element={<RouterBreadcrumbs />} />
+              <Route path="/index" element={<RouterBreadcrumbs />} />
+              {Object.keys(wikiData).map((type, typeIndex) =>
+                Object.keys(wikiData[type].childrens).map((camp, campIndex) => (
+                  <>
+                    <Route path={"/" + type} element={<RouterBreadcrumbs />} />
+                    <Route
+                      path={"/" + type + "/" + camp}
+                      element={<RouterBreadcrumbs />}
+                    />
+                  </>
+                ))
+              )}
+            </Routes>
+          </BrowserRouter>
+        </Box>
+      </Box>
     </CssBaseline>
   </StrictMode>
 );

@@ -248,7 +248,7 @@ export default function Sidebar() {
           </Typography>
           <LinearProgress
             variant="outlined"
-            value={10}
+            value={15}
             determinate
             sx={{ my: 1 }}
           />

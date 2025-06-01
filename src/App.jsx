@@ -1,10 +1,8 @@
 import { useState } from "react";
-import Sidebar from "./components/Sidebar";
-import Topbar from "./components/Topbar";
-
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import wikiData from "./Data";
+import Home from "./Home";
 function App() {
-  const [count, setCount] = useState(0);
-
   return <></>;
 }
 
