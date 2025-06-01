@@ -9,6 +9,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import wikiData from "./Data";
 import Home from "./Home";
 import RouterBreadcrumbs from "./components/Path.jsx";
+import HomeHero from "./components/HomeHero.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -37,7 +38,15 @@ createRoot(document.getElementById("root")).render(
         >
           <BrowserRouter>
             <Routes>
-              <Route path="/" element={<RouterBreadcrumbs />} />
+              <Route
+                path="/"
+                element={
+                  <Box>
+                    <RouterBreadcrumbs />
+                    <HomeHero />
+                  </Box>
+                }
+              />
               <Route path="/about" element={<RouterBreadcrumbs />} />
               <Route path="/siteIndex" element={<RouterBreadcrumbs />} />
               {Object.keys(wikiData).map((type, typeIndex) =>
