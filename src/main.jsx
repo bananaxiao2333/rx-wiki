@@ -2,7 +2,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App.jsx";
 import "@fontsource/inter";
-import { Box, CssBaseline } from "@mui/joy";
+import { Box, CssBaseline, Typography } from "@mui/joy";
 import Sidebar from "./components/Sidebar.jsx";
 import Topbar from "./components/Topbar.jsx";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -51,6 +51,20 @@ createRoot(document.getElementById("root")).render(
                   </>
                 ))
               )}
+              <Route
+                path="/*"
+                element={
+                  <Box>
+                    <Typography level="h1" sx={{ fontSize: "10" }}>
+                      404 Page Not Found
+                    </Typography>
+                    <Typography sx={{ fontSize: "10" }}>
+                      This page does not exist. You may need to go back to the
+                      homepage.
+                    </Typography>
+                  </Box>
+                }
+              />
             </Routes>
           </BrowserRouter>
         </Box>
