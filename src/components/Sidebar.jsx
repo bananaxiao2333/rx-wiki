@@ -22,6 +22,8 @@ import RxwikiIcon from "../assets/rxwiki-icon.svg";
 
 import { closeSidebar } from "./utils";
 import { InfoRounded, ListRounded } from "@mui/icons-material";
+import ColorSchemeToggle from "./ColorSchemeToggle";
+import { CssVarsProvider } from "@mui/joy";
 
 function Toggler({ defaultExpanded = false, renderToggle, children }) {
   const [open, setOpen] = React.useState(defaultExpanded);
@@ -104,6 +106,9 @@ export default function Sidebar() {
           <img src={RxwikiIcon} width={30} />
         </IconButton>
         <Typography level="title-lg">RXWIKI</Typography>
+        <CssVarsProvider>
+          <ColorSchemeToggle sx={{ ml: "auto" }} />
+        </CssVarsProvider>
       </Box>
       <Input
         size="sm"
