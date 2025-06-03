@@ -35,7 +35,7 @@ export default function HomeHero() {
         </Typography>
         <Button
           size="lg"
-          onClick={() => (window.location = "/about")}
+          onClick={() => (window.location = "/#/about")}
           endDecorator={<ArrowForward fontSize="xl" />}
         >
           Get Started
@@ -44,7 +44,7 @@ export default function HomeHero() {
           <br />
           View the materials directly?{" "}
           <Link
-            onClick={() => (window.location = "/siteIndex")}
+            onClick={() => (window.location = "/#/siteIndex")}
             sx={{ fontWeight: "lg" }}
           >
             Index Page
