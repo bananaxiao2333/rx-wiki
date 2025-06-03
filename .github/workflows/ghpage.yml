@@ -18,9 +18,8 @@ jobs:
       - name: Build Project
         run: npm run build
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3  # 官方推荐插件
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist       # 你的构建输出目录
-          publish_branch: gh-pages  # GitHub Pages分支名
+          publish_dir: ./dist
