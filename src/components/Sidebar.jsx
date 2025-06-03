@@ -107,7 +107,7 @@ export default function Sidebar() {
           <IconButton variant="soft" color="primary" size="sm">
             <img src={RxwikiIcon} width={30} />
           </IconButton>
-          <Typography level="title-lg">RXWIKI</Typography>
+          <Typography level="title-lg">RxsensWN</Typography>
           <CssVarsProvider>
             <ColorSchemeToggle sx={{ ml: "auto" }} />
           </CssVarsProvider>
@@ -252,7 +252,7 @@ export default function Sidebar() {
           >
             <Typography level="title-sm">Warning</Typography>
           </Stack>
-          <Typography level="body-xs">RXWIKI is under construction!</Typography>
+          <Typography level="body-xs">RxsendWN is under construction!</Typography>
           <LinearProgress variant="outlined" sx={{ my: 1 }} />
         </Card>
       </Box>
