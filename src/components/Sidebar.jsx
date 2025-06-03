@@ -139,7 +139,7 @@ export default function Sidebar() {
           }}
         >
           <ListItem>
-            <ListItemButton role="menuitem" component="a" href="/">
+            <ListItemButton role="menuitem" component="a" href="/#/">
               <HomeRoundedIcon />
               <ListItemContent>
                 <Typography level="title-sm">Home</Typography>
@@ -148,7 +148,7 @@ export default function Sidebar() {
           </ListItem>
 
           <ListItem>
-            <ListItemButton role="menuitem" component="a" href="/about">
+            <ListItemButton role="menuitem" component="a" href="/#/about">
               <InfoRounded />
               <ListItemContent>
                 <Typography level="title-sm">About</Typography>
@@ -157,7 +157,7 @@ export default function Sidebar() {
           </ListItem>
 
           <ListItem>
-            <ListItemButton role="menuitem" component="a" href="/siteIndex">
+            <ListItemButton role="menuitem" component="a" href="/#/siteIndex">
               <ListRounded />
               <ListItemContent>
                 <Typography level="title-sm">Index</Typography>
@@ -198,7 +198,7 @@ export default function Sidebar() {
                       <ListItem
                         key={itemIndex}
                         component="a"
-                        href={"/" + type + "/" + item}
+                        href={"/#/" + type + "/" + item}
                         sx={{ textDecoration: "inherit" }}
                       >
                         <img

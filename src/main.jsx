@@ -5,7 +5,7 @@ import "@fontsource/inter";
 import { Box, CssBaseline, Typography } from "@mui/joy";
 import Sidebar from "./components/Sidebar.jsx";
 import Topbar from "./components/Topbar.jsx";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import wikiData from "./Data";
 import Home from "./Home";
 import RouterBreadcrumbs from "./components/Path.jsx";
@@ -39,7 +39,7 @@ createRoot(document.getElementById("root")).render(
             gap: 1,
           }}
         >
-          <BrowserRouter>
+          <HashRouter>
             <Routes>
               <Route
                 path="/"
@@ -86,7 +86,7 @@ createRoot(document.getElementById("root")).render(
                 }
               />
             </Routes>
-          </BrowserRouter>
+          </HashRouter>
         </Box>
       </Box>
     </CssBaseline>
