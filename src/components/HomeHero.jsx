@@ -4,8 +4,10 @@ import Link from "@mui/joy/Link";
 import Typography from "@mui/joy/Typography";
 import ArrowForward from "@mui/icons-material/ArrowForward";
 import { Box } from "@mui/joy";
+import { useTranslation, initReactI18next, Trans } from "react-i18next";
 
 export default function HomeHero() {
+  const { t, i18n } = useTranslation();
   return (
     <Box
       sx={{
@@ -15,7 +17,7 @@ export default function HomeHero() {
     >
       <Box>
         <Typography color="primary" sx={{ fontSize: "lg", fontWeight: "lg" }}>
-          The power of learning more.
+          {t("pageHome.blueTitle")}
         </Typography>
         <Typography
           level="h1"
@@ -24,7 +26,7 @@ export default function HomeHero() {
             fontSize: "clamp(1.875rem, 1.3636rem + 2.1818vw, 3rem)",
           }}
         >
-          A Wiki website designed for RXSEND players
+          {t("pageHome.bigTitle")}
         </Typography>
         <Typography
           textColor="text.secondary"

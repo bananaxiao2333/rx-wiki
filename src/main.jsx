@@ -6,13 +6,13 @@ import { Box, CssBaseline, Typography } from "@mui/joy";
 import Sidebar from "./components/Sidebar.jsx";
 import Topbar from "./components/Topbar.jsx";
 import { HashRouter, Routes, Route } from "react-router-dom";
-import wikiData from "./Data";
 import Home from "./Home";
 import RouterBreadcrumbs from "./components/Path.jsx";
 import HomeHero from "./components/HomeHero.jsx";
 import About from "./About.jsx";
-
+import setupI18n from "./Data.jsx";
 //TODO: change black to grey black background theme
+setupI18n();
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -60,17 +60,6 @@ createRoot(document.getElementById("root")).render(
                 }
               />
               <Route path="/siteIndex" element={<RouterBreadcrumbs />} />
-              {Object.keys(wikiData).map((type, typeIndex) =>
-                Object.keys(wikiData[type].childrens).map((camp, campIndex) => (
-                  <>
-                    <Route path={"/" + type} element={<RouterBreadcrumbs />} />
-                    <Route
-                      path={"/" + type + "/" + camp}
-                      element={<RouterBreadcrumbs />}
-                    />
-                  </>
-                ))
-              )}
               <Route
                 path="/*"
                 element={

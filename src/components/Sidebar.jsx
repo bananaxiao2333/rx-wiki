@@ -21,10 +21,15 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import RxwikiIcon from "../assets/rxwiki-icon.svg";
 
 import { closeSidebar } from "./utils";
-import { AllOutRounded, InfoRounded, ListRounded } from "@mui/icons-material";
+import {
+  AllOutRounded,
+  InfoRounded,
+  LanguageRounded,
+  ListRounded,
+} from "@mui/icons-material";
 import ColorSchemeToggle from "./ColorSchemeToggle";
-import { CssVarsProvider, ListDivider } from "@mui/joy";
-import wikiData from "../Data";
+import { CssVarsProvider, ListDivider, Option, Select } from "@mui/joy";
+import { useTranslation, initReactI18next, Trans } from "react-i18next";
 
 function Toggler({ defaultExpanded = false, renderToggle, children }) {
   const [open, setOpen] = React.useState(defaultExpanded);
@@ -50,6 +55,11 @@ function Toggler({ defaultExpanded = false, renderToggle, children }) {
 }
 
 export default function Sidebar() {
+  const { t, i18n } = useTranslation();
+  const lngs = {
+    zh: { nativeName: "中文" },
+    en: { nativeName: "English" },
+  };
   return (
     <Sheet
       className="Sidebar"
@@ -102,21 +112,19 @@ export default function Sidebar() {
         }}
         onClick={() => closeSidebar()}
       />
-      <a href="/" style={{ textDecoration: "none" }}>
-        <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
-          <IconButton variant="soft" color="primary" size="sm">
-            <img src={RxwikiIcon} width={30} />
-          </IconButton>
-          <Typography level="title-lg">RxsensWN</Typography>
-          <CssVarsProvider>
-            <ColorSchemeToggle sx={{ ml: "auto" }} />
-          </CssVarsProvider>
-        </Box>{" "}
-      </a>
+      <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
+        <IconButton variant="soft" color="primary" size="sm">
+          <img src={RxwikiIcon} width={30} />
+        </IconButton>
+        <Typography level="title-lg">RxsensWN</Typography>
+        <CssVarsProvider>
+          <ColorSchemeToggle sx={{ ml: "auto" }} />
+        </CssVarsProvider>
+      </Box>{" "}
       <Input
         size="sm"
         startDecorator={<SearchRoundedIcon />}
-        placeholder="Search"
+        placeholder={t("sideBar.search")}
       />
       <Box
         sx={{
@@ -142,7 +150,7 @@ export default function Sidebar() {
             <ListItemButton role="menuitem" component="a" href="/#/">
               <HomeRoundedIcon />
               <ListItemContent>
-                <Typography level="title-sm">Home</Typography>
+                <Typography level="title-sm">{t("sideBar.Home")}</Typography>
               </ListItemContent>
             </ListItemButton>
           </ListItem>
@@ -151,7 +159,7 @@ export default function Sidebar() {
             <ListItemButton role="menuitem" component="a" href="/#/about">
               <InfoRounded />
               <ListItemContent>
-                <Typography level="title-sm">About</Typography>
+                <Typography level="title-sm">{t("sideBar.About")}</Typography>
               </ListItemContent>
             </ListItemButton>
           </ListItem>
@@ -160,67 +168,115 @@ export default function Sidebar() {
             <ListItemButton role="menuitem" component="a" href="/#/siteIndex">
               <ListRounded />
               <ListItemContent>
-                <Typography level="title-sm">Index</Typography>
+                <Typography level="title-sm">{t("sideBar.Index")}</Typography>
               </ListItemContent>
             </ListItemButton>
           </ListItem>
-
-          <ListDivider />
-
-          {Object.keys(wikiData).map((type, index) => (
-            // this layer is for factions or items etc
-            <ListItem nested key={index}>
-              <Toggler
-                renderToggle={({ open, setOpen }) => (
-                  <ListItemButton onClick={() => setOpen(!open)}>
-                    {wikiData[type].icon}
-                    <ListItemContent>
-                      <Typography level="title-sm">{type}</Typography>
-                    </ListItemContent>
-                    <KeyboardArrowDownIcon
-                      sx={[
-                        open
-                          ? {
-                              transform: "rotate(180deg)",
-                            }
-                          : {
-                              transform: "none",
-                            },
-                      ]}
-                    />
-                  </ListItemButton>
-                )}
-              >
-                <List sx={{ gap: 0.5 }}>
-                  {Object.keys(wikiData[type].childrens).map(
-                    // this layer is for items like class-d
-                    (item, itemIndex) => (
-                      <ListItem
-                        key={itemIndex}
-                        component="a"
-                        href={"/#/" + type + "/" + item}
-                        sx={{ textDecoration: "inherit" }}
-                      >
-                        <img
-                          src={wikiData[type].childrens[item].icon}
-                          width={23}
-                          style={{ zIndex: "1000" }}
-                        />
-                        <ListItemButton
-                          sx={{
-                            color:
-                              wikiData[type].childrens[item].color ?? "inherit",
+          <ListItem nested>
+            <Toggler
+              renderToggle={({ open, setOpen }) => (
+                <ListItemButton onClick={() => setOpen(!open)}>
+                  <LanguageRounded />
+                  <ListItemContent>
+                    <Typography level="title-sm">
+                      {t("sideBar.changeLang")}
+                    </Typography>
+                  </ListItemContent>
+                  <KeyboardArrowDownIcon
+                    sx={[
+                      open
+                        ? {
+                            transform: "rotate(180deg)",
+                          }
+                        : {
+                            transform: "none",
+                          },
+                    ]}
+                  />
+                </ListItemButton>
+              )}
+            >
+              <List sx={{ gap: 0.5 }}>
+                {Object.keys(lngs).map((lng) => (
+                  <ListItem key={lng}>
+                    <ListItemButton
+                      role="menuitem"
+                      value={lng}
+                      onClick={(event) => {
+                        i18n.changeLanguage(
+                          event.currentTarget.getAttribute("value")
+                        );
+                      }}
+                    >
+                      <ListItemContent>
+                        <Typography
+                          level="title-sm"
+                          key={lng}
+                          value={lng}
+                          label={lngs[lng].nativeName}
+                          style={{
+                            fontWeight:
+                              i18n.resolvedLanguage === lng ? "bold" : "normal",
                           }}
                         >
-                          {item}
-                        </ListItemButton>
-                      </ListItem>
-                    )
-                  )}
-                </List>
-              </Toggler>
-            </ListItem>
-          ))}
+                          {lngs[lng].nativeName}
+                        </Typography>
+                      </ListItemContent>
+                    </ListItemButton>
+                  </ListItem>
+                ))}
+              </List>
+            </Toggler>
+          </ListItem>
+          <ListDivider />
+
+          <ListItem nested>
+            <Toggler
+              renderToggle={({ open, setOpen }) => (
+                <ListItemButton onClick={() => setOpen(!open)}>
+                  <AllOutRounded />
+                  <ListItemContent>
+                    <Typography level="title-sm">
+                      {t("sideBar.Factions")}
+                    </Typography>
+                  </ListItemContent>
+                  <KeyboardArrowDownIcon
+                    sx={[
+                      open
+                        ? {
+                            transform: "rotate(180deg)",
+                          }
+                        : {
+                            transform: "none",
+                          },
+                    ]}
+                  />
+                </ListItemButton>
+              )}
+            >
+              <List sx={{ gap: 0.5 }}>
+                <ListItem
+                  key="1"
+                  component="a"
+                  href="/#/"
+                  sx={{ textDecoration: "inherit" }}
+                >
+                  <img
+                    src="/img/class_d.png"
+                    width={23}
+                    style={{ zIndex: "1000" }}
+                  />
+                  <ListItemButton
+                    sx={{
+                      color: "#754214",
+                    }}
+                  >
+                    Class-d
+                  </ListItemButton>
+                </ListItem>
+              </List>
+            </Toggler>
+          </ListItem>
         </List>
         <List
           size="sm"
@@ -235,7 +291,7 @@ export default function Sidebar() {
           <ListItem>
             <ListItemButton>
               <SupportRoundedIcon />
-              Support
+              {t("sideBar.Support")}
             </ListItemButton>
           </ListItem>
         </List>
@@ -250,9 +306,11 @@ export default function Sidebar() {
             direction="row"
             sx={{ justifyContent: "space-between", alignItems: "center" }}
           >
-            <Typography level="title-sm">Warning</Typography>
+            <Typography level="title-sm">{t("msgType.warning")}</Typography>
           </Stack>
-          <Typography level="body-xs">RxsendWN is under construction!</Typography>
+          <Typography level="body-xs">
+            {t("sideBar.RWDunderConstruct")}
+          </Typography>
           <LinearProgress variant="outlined" sx={{ my: 1 }} />
         </Card>
       </Box>
@@ -260,7 +318,7 @@ export default function Sidebar() {
       <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
         <Box sx={{ minWidth: 0, flex: 1 }}>
           <Typography level="title-sm">
-            Site under{" "}
+            {t("sideBar.SiteUnder")}{" "}
             <a
               href="https://creativecommons.org/licenses/by-nc-sa/4.0/"
               style={{
@@ -271,7 +329,7 @@ export default function Sidebar() {
               CC BY-NC-SA
             </a>
           </Typography>
-          <Typography level="body-xs">♡Made By Fans</Typography>
+          <Typography level="body-xs">{t("sideBar.MadeBy")}</Typography>
         </Box>
       </Box>
     </Sheet>
