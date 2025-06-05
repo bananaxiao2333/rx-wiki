@@ -15,7 +15,6 @@ import Sheet from "@mui/joy/Sheet";
 import Stack from "@mui/joy/Stack";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
-import AssignmentRoundedIcon from "@mui/icons-material/AssignmentRounded";
 import SupportRoundedIcon from "@mui/icons-material/SupportRounded";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import RxwikiIcon from "../assets/rxwiki-icon.svg";
@@ -28,8 +27,8 @@ import {
   ListRounded,
 } from "@mui/icons-material";
 import ColorSchemeToggle from "./ColorSchemeToggle";
-import { CssVarsProvider, ListDivider, Option, Select } from "@mui/joy";
-import { useTranslation, initReactI18next, Trans } from "react-i18next";
+import { CssVarsProvider, ListDivider } from "@mui/joy";
+import { useTranslation } from "react-i18next";
 
 function Toggler({ defaultExpanded = false, renderToggle, children }) {
   const [open, setOpen] = React.useState(defaultExpanded);
@@ -129,12 +128,12 @@ export default function Sidebar() {
           level="title-lg"
           sx={{ textDecoration: "none" }}
         >
-          RxsensWN
+          RxsendWN
         </Typography>
         <CssVarsProvider>
           <ColorSchemeToggle sx={{ ml: "auto" }} />
         </CssVarsProvider>
-      </Box>{" "}
+      </Box>
       <Input
         size="sm"
         startDecorator={<SearchRoundedIcon />}
