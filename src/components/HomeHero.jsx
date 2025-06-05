@@ -5,6 +5,7 @@ import Typography from "@mui/joy/Typography";
 import ArrowForward from "@mui/icons-material/ArrowForward";
 import { Box } from "@mui/joy";
 import { useTranslation, initReactI18next, Trans } from "react-i18next";
+import RxwikiIcon from "../assets/rxwiki-icon.svg";
 
 export default function HomeHero() {
   const { t, i18n } = useTranslation();
@@ -32,24 +33,23 @@ export default function HomeHero() {
           textColor="text.secondary"
           sx={{ fontSize: "lg", lineHeight: "lg" }}
         >
-          It's time for information to no longer rely on word-of-mouth but on
-          individual links
+          {t("pageHome.secondary")}
         </Typography>
         <Button
           size="lg"
           onClick={() => (window.location = "/#/about")}
           endDecorator={<ArrowForward fontSize="xl" />}
         >
-          Get Started
+          {t("pageHome.getStarted")}
         </Button>
         <Typography>
           <br />
-          View the materials directly?{" "}
+          {t("pageHome.viewMateirals")}{" "}
           <Link
             onClick={() => (window.location = "/#/siteIndex")}
             sx={{ fontWeight: "lg" }}
           >
-            Index Page
+            {t("sideBar.Index")}
           </Link>
         </Typography>
       </Box>
@@ -58,7 +58,7 @@ export default function HomeHero() {
           width: { sm: "80%", md: "50%" },
         }}
       >
-        <img src="/rxwiki-icon.svg" style={{ width: "100%" }} />
+        <img src={RxwikiIcon} style={{ width: "100%" }} />
       </Box>
     </Box>
   );

@@ -58,6 +58,7 @@ export default function Sidebar() {
   const { t, i18n } = useTranslation();
   const lngs = {
     zh: { nativeName: "中文" },
+    ru: { nativeName: "Русский язык" },
     en: { nativeName: "English" },
   };
   return (
@@ -113,10 +114,23 @@ export default function Sidebar() {
         onClick={() => closeSidebar()}
       />
       <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
-        <IconButton variant="soft" color="primary" size="sm">
+        <IconButton
+          variant="soft"
+          color="primary"
+          size="sm"
+          component="a"
+          href="/#/"
+        >
           <img src={RxwikiIcon} width={30} />
         </IconButton>
-        <Typography level="title-lg">RxsensWN</Typography>
+        <Typography
+          component="a"
+          href="/#/"
+          level="title-lg"
+          sx={{ textDecoration: "none" }}
+        >
+          RxsensWN
+        </Typography>
         <CssVarsProvider>
           <ColorSchemeToggle sx={{ ml: "auto" }} />
         </CssVarsProvider>

@@ -10,13 +10,14 @@ import ExpandMore from "@mui/icons-material/ExpandMore";
 import Breadcrumbs from "@mui/joy/Breadcrumbs";
 import { Link as RouterLink, useLocation } from "react-router";
 import { HomeOutlined } from "@mui/icons-material";
-
-const breadcrumbNameMap = {
-  "/about": "About",
-  "/siteIndex": "Index",
-};
+import { useTranslation } from "react-i18next";
 
 function ListItemLink(props) {
+  const { t, i18n } = useTranslation();
+  const breadcrumbNameMap = {
+    "/about": t("sideBar.About"),
+    "/siteIndex": t("sideBar.Index"),
+  };
   const { to, open, ...other } = props;
   const primary = breadcrumbNameMap[to] ?? to.split("/").slice(-1)[0];
 
@@ -47,6 +48,12 @@ function LinkRouter(props) {
 }
 
 function Page() {
+  const { t, i18n } = useTranslation();
+
+  const breadcrumbNameMap = {
+    "/about": t("sideBar.About"),
+    "/siteIndex": t("sideBar.Index"),
+  };
   const location = useLocation();
   const pathnames = location.pathname.split("/").filter((x) => x);
 
@@ -54,7 +61,7 @@ function Page() {
     <Breadcrumbs aria-label="breadcrumb">
       <LinkRouter underline="hover" color="inherit" to="/">
         <HomeOutlined />
-        Home
+        {t("sideBar.Home")}
       </LinkRouter>
       {pathnames.map((value, index) => {
         const last = index === pathnames.length - 1;

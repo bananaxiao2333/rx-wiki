@@ -1,8 +1,10 @@
 import i18n from "i18next";
 import { useTranslation, initReactI18next } from "react-i18next";
+import detector from "i18next-browser-languagedetector";
 
 export default function setupI18n() {
   i18n
+    .use(detector)
     .use(initReactI18next) // passes i18n down to react-i18next
     .init({
       // the translations
@@ -26,6 +28,10 @@ export default function setupI18n() {
             pageHome: {
               blueTitle: "The power of learning more",
               bigTitle: "A Wiki website designed for RXSEND players",
+              secondary:
+                "It's time for information to no longer rely on word-of-mouth but on individual links",
+              getStarted: "Get Started",
+              viewMateirals: "View the materials directly?",
             },
             msgType: {
               warning: "warning",
@@ -49,14 +55,43 @@ export default function setupI18n() {
             pageHome: {
               blueTitle: "认识更多的力量",
               bigTitle: "为RXSEND玩家创建的维基网站",
+              secondary: "是时候让知识传播不再依赖口口相传而是一条条资料链接了",
+              getStarted: "开始",
+              viewMateirals: "直接查看资料？",
             },
             msgType: {
               warning: "警告",
             },
           },
         },
+        ru: {
+          translation: {
+            sideBar: {
+              Home: "Главная",
+              About: "О нас",
+              Index: "Индекс",
+              Factions: "Фракции",
+              Support: "Поддержка",
+              RWDunderConstruct: "RxsendWN в разработке!", // Или "RxsendWN сейчас строится!"
+              SiteUnder: "Сайт следует",
+              MadeBy: "♡ Сделано фанатами",
+              changeLang: "Сменить язык",
+              search: "Поиск",
+            },
+            pageHome: {
+              blueTitle: "Познай больше сил",
+              bigTitle: "Вики, созданная для игроков RXSEND",
+              secondary:
+                "Пора, чтобы знания распространялись не из уст в уста, а по ссылкам на материалы",
+              getStarted: "Начать",
+              viewMateirals: "Смотреть материалы сразу?",
+            },
+            msgType: {
+              warning: "Предупреждение",
+            },
+          },
+        },
       },
-      lng: "zh", // if you're using a language detector, do not define the lng option
       fallbackLng: "en",
 
       interpolation: {
