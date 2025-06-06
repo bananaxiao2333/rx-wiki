@@ -26,7 +26,7 @@ const components = {
 
 export const ContentRenderer = ({ contentPath }) => {
   const { t, i18n } = useTranslation();
-  const Content = React.lazy(() => import(`./content/${contentPath}`));
+  const Content = React.lazy(() => import(`/content/${contentPath}`));
   const [lang] = i18n.resolvedLanguage;
 
   return (
