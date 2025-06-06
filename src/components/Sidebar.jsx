@@ -27,7 +27,12 @@ import {
   ListRounded,
 } from "@mui/icons-material";
 import ColorSchemeToggle from "./ColorSchemeToggle";
-import { CssVarsProvider, ListDivider } from "@mui/joy";
+import {
+  Autocomplete,
+  CircularProgress,
+  CssVarsProvider,
+  ListDivider,
+} from "@mui/joy";
 import { useTranslation } from "react-i18next";
 
 function Toggler({ defaultExpanded = false, renderToggle, children }) {
@@ -54,6 +59,16 @@ function Toggler({ defaultExpanded = false, renderToggle, children }) {
 }
 
 export default function Sidebar() {
+  const [inputKeyword, setinputKeyword] = React.useState("");
+  const handelinputKeyword = (event) => {
+    setinputKeyword(event.target.value);
+  };
+  const handleKeywordChange = (event) => {
+    if (event.keyCode == 13) {
+      window.location.href = "/?q=" + inputKeyword + "#/siteIndex";
+    }
+  };
+
   const { t, i18n } = useTranslation();
   const lngs = {
     zh: { nativeName: "中文" },
@@ -138,6 +153,8 @@ export default function Sidebar() {
         size="sm"
         startDecorator={<SearchRoundedIcon />}
         placeholder={t("sideBar.search")}
+        onKeyDown={handleKeywordChange}
+        onChange={handelinputKeyword}
       />
       <Box
         sx={{
@@ -271,7 +288,7 @@ export default function Sidebar() {
                 <ListItem
                   key="1"
                   component="a"
-                  href="/#/"
+                  href="/#/factions/Class-D"
                   sx={{ textDecoration: "inherit" }}
                 >
                   <img

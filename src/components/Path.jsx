@@ -50,10 +50,16 @@ function LinkRouter(props) {
 function Page() {
   const { t, i18n } = useTranslation();
 
-  const breadcrumbNameMap = {
-    "/about": t("sideBar.About"),
-    "/siteIndex": t("sideBar.Index"),
-  };
+  function breadcrumbNameMap(inputkey) {
+    var key = inputkey.split("/").slice(-1)[0];
+    var basicbreadcrumbNameMap = {
+      "/about": t("sideBar.About"),
+      "/siteIndex": t("sideBar.Index"),
+      "/factions": t("route.factions"),
+    };
+    var smartbreadcrumbNameMap = t("route." + key);
+    return basicbreadcrumbNameMap[inputkey] ?? smartbreadcrumbNameMap;
+  }
   const location = useLocation();
   const pathnames = location.pathname.split("/").filter((x) => x);
 
@@ -69,11 +75,11 @@ function Page() {
 
         return last ? (
           <Typography key={to} sx={{ color: "text.primary" }}>
-            {breadcrumbNameMap[to] ?? to.split("/").slice(-1)[0]}
+            {breadcrumbNameMap(to) ?? to.split("/").slice(-1)[0]}
           </Typography>
         ) : (
           <LinkRouter underline="hover" color="inherit" to={to} key={to}>
-            {breadcrumbNameMap[to] ?? to.split("/").slice(-1)[0]}
+            {breadcrumbNameMap(to) ?? to.split("/").slice(-1)[0]}
           </LinkRouter>
         );
       })}

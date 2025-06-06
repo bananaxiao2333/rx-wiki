@@ -1,9 +1,18 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
+import mdx from "@mdx-js/rollup";
+import remarkFrontmatter from "remark-frontmatter";
+import remarkParseFrontmatter from "remark-parse-frontmatter";
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    mdx({
+      remarkPlugins: [remarkFrontmatter, remarkParseFrontmatter],
+      providerImportSource: "@mdx-js/react",
+    }),
+    react(),
+  ],
   build: {
     chunkSizeWarningLimit: 1500, // 调整包的大小
     rollupOptions: {
