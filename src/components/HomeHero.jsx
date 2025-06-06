@@ -54,8 +54,8 @@ export default function HomeHero() {
         </Typography>
       </Box>
       <Box
-        style={{
-          width: { sm: "80%", md: "50%" },
+        sx={{
+          width: { sm: "80%", md: "600px" },
         }}
       >
         <img src={RxwikiIcon} style={{ width: "100%" }} />

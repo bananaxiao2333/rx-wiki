@@ -32,6 +32,7 @@ import {
   CircularProgress,
   CssVarsProvider,
   ListDivider,
+  Snackbar,
 } from "@mui/joy";
 import { useTranslation } from "react-i18next";
 
@@ -59,6 +60,7 @@ function Toggler({ defaultExpanded = false, renderToggle, children }) {
 }
 
 export default function Sidebar() {
+  const [open, setOpen] = React.useState(false);
   const [inputKeyword, setinputKeyword] = React.useState("");
   const handelinputKeyword = (event) => {
     setinputKeyword(event.target.value);
@@ -226,6 +228,21 @@ export default function Sidebar() {
                 </ListItemButton>
               )}
             >
+              <Snackbar
+                autoHideDuration={3000}
+                open={open}
+                variant="outlined"
+                color="success"
+                onClose={(event, reason) => {
+                  if (reason === "clickaway") {
+                    return;
+                  }
+                  setOpen(false);
+                }}
+                startDecorator={<LanguageRounded />}
+              >
+                {lngs[i18n.resolvedLanguage].nativeName}
+              </Snackbar>
               <List sx={{ gap: 0.5 }}>
                 {Object.keys(lngs).map((lng) => (
                   <ListItem key={lng}>
@@ -236,6 +253,7 @@ export default function Sidebar() {
                         i18n.changeLanguage(
                           event.currentTarget.getAttribute("value")
                         );
+                        setOpen(true);
                       }}
                     >
                       <ListItemContent>
