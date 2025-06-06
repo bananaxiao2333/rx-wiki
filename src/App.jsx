@@ -8,6 +8,7 @@ import NotFoundPage from "./NotFoundPage";
 import SiteIndexPage from "./SiteIndex";
 import { MDXProvider } from "@mdx-js/react";
 import { useTranslation } from "react-i18next";
+const contentModules = import.meta.glob("./content/**/*.mdx", { eager: false });
 
 import { loadMdxFiles, parseMdxFilesBrowser } from "./utils/DataManage";
 
@@ -26,20 +27,61 @@ const components = {
 
 export const ContentRenderer = ({ contentPath }) => {
   const { t, i18n } = useTranslation();
-  const Content = React.lazy(() => import(`/content/${contentPath}`));
+  const [Component, setComponent] = React.useState(null);
+  const [error, setError] = React.useState(null);
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    // 重置状态
+    setError(null);
+    setLoading(true);
+    setComponent(null);
+
+    // 规范路径：移除可能的扩展名
+    const normalizedContentPath = contentPath.replace(/\.(mdx|md)$/, "");
+    const fullPath = `./content/${normalizedContentPath}.mdx`;
+
+    if (contentModules[fullPath]) {
+      // 调用函数返回Promise，然后处理
+      contentModules[fullPath]()
+        .then((module) => {
+          if (module.default) {
+            setComponent(() => module.default);
+          } else {
+            throw new Error("MDX file has no default export");
+          }
+        })
+        .catch((err) => {
+          setError({
+            type: "load-error",
+            message: t("load_error"),
+            details: err.message,
+          });
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    } else {
+      setLoading(false);
+      setError({
+        type: "not-found",
+        message: t("not_found_error"),
+        details: t("not_found_detail", { path: fullPath }),
+      });
+    }
+  }, [contentPath, t]);
   const [lang] = i18n.resolvedLanguage;
 
+  if (loading) {
+    return (
+      <Box display="flex" justifyContent="center" py={5}>
+        <CircularProgress />
+      </Box>
+    );
+  }
   return (
     <MDXProvider components={components} key={lang}>
-      <React.Suspense
-        fallback={
-          <Box display="flex" justifyContent="center" py={5}>
-            <CircularProgress />
-          </Box>
-        }
-      >
-        <Content />
-      </React.Suspense>
+      <Component />
     </MDXProvider>
   );
 };
@@ -106,7 +148,7 @@ function App() {
             element={
               <Box>
                 <RouterBreadcrumbs />
-                <ContentRenderer contentPath={file.path} />
+                <ContentRenderer contentPath={file.path.replace(".mdx", "")} />
               </Box>
             }
           />
