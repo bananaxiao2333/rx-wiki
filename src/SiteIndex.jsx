@@ -1,7 +1,7 @@
 import * as React from "react";
 import { loadMdxFiles } from "./utils/DataManage";
 import { parseMdxFilesBrowser } from "./utils/DataManage";
-import { Card, Sheet, Stack, Typography } from "@mui/joy";
+import { Card, Sheet, Skeleton, Stack, Typography } from "@mui/joy";
 import { useTranslation } from "react-i18next";
 import { styled } from "@mui/joy/styles";
 import { useParams } from "react-router-dom";
@@ -92,7 +92,11 @@ export default function SiteIndexPage() {
                 gap: "5px",
               }}
             >
-              <img src={file.frontmatter.icon} style={{ height: 30 }} />
+              {Item ? (
+                <img src={file.frontmatter.icon} style={{ height: 30 }} />
+              ) : (
+                <Skeleton variant="circular" width={30} height={30} />
+              )}
               <Typography level="h2">
                 {file.path.replace(".mdx", "")}
               </Typography>

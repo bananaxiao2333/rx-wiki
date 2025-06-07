@@ -1,4 +1,4 @@
-import { Box, CircularProgress, Sheet, Typography } from "@mui/joy";
+import { Box, CircularProgress, Sheet, Skeleton, Typography } from "@mui/joy";
 import * as React from "react";
 import { HashRouter, Route, Routes } from "react-router-dom";
 import About from "./About";
@@ -158,7 +158,6 @@ function App() {
           path="/*"
           element={
             <Box>
-              <RouterBreadcrumbs />
               <NotFoundPage />
             </Box>
           }

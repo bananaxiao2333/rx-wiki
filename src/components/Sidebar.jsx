@@ -22,18 +22,13 @@ import RxwikiIcon from "../assets/rxwiki-icon.svg";
 import { closeSidebar } from "./utils";
 import {
   AllOutRounded,
+  ChangeCircleRounded,
   InfoRounded,
-  LanguageRounded,
+  TranslateRounded,
   ListRounded,
 } from "@mui/icons-material";
 import ColorSchemeToggle from "./ColorSchemeToggle";
-import {
-  Autocomplete,
-  CircularProgress,
-  CssVarsProvider,
-  ListDivider,
-  Snackbar,
-} from "@mui/joy";
+import { CssVarsProvider, ListDivider, Snackbar } from "@mui/joy";
 import { useTranslation } from "react-i18next";
 
 function Toggler({ defaultExpanded = false, renderToggle, children }) {
@@ -78,308 +73,317 @@ export default function Sidebar() {
     en: { nativeName: "English" },
   };
   return (
-    <Sheet
-      className="Sidebar"
-      sx={{
-        position: { xs: "fixed", md: "sticky" },
-        transform: {
-          xs: "translateX(calc(100% * (var(--SideNavigation-slideIn, 0) - 1)))",
-          md: "none",
-        },
-        transition: "transform 0.4s, width 0.4s",
-        zIndex: 10000,
-        height: "100dvh",
-        width: "var(--Sidebar-width)",
-        top: 0,
-        p: 2,
-        flexShrink: 0,
-        display: "flex",
-        flexDirection: "column",
-        gap: 2,
-        borderRight: "1px solid",
-        borderColor: "divider",
-      }}
-    >
-      <GlobalStyles
-        styles={(theme) => ({
-          ":root": {
-            "--Sidebar-width": "220px",
-            [theme.breakpoints.up("lg")]: {
-              "--Sidebar-width": "240px",
-            },
-          },
-        })}
-      />
-      <Box
-        className="Sidebar-overlay"
+    <>
+      <Sheet
+        className="Sidebar"
         sx={{
-          position: "fixed",
-          zIndex: 9998,
-          top: 0,
-          left: 0,
-          width: "100vw",
-          height: "100vh",
-          opacity: "var(--SideNavigation-slideIn)",
-          backgroundColor: "var(--joy-palette-background-backdrop)",
-          transition: "opacity 0.4s",
+          position: { xs: "fixed", md: "sticky" },
           transform: {
-            xs: "translateX(calc(100% * (var(--SideNavigation-slideIn, 0) - 1) + var(--SideNavigation-slideIn, 0) * var(--Sidebar-width, 0px)))",
-            lg: "translateX(-100%)",
+            xs: "translateX(calc(100% * (var(--SideNavigation-slideIn, 0) - 1)))",
+            md: "none",
           },
-        }}
-        onClick={() => closeSidebar()}
-      />
-      <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
-        <IconButton
-          variant="soft"
-          color="primary"
-          size="sm"
-          component="a"
-          href="/#/"
-        >
-          <img src={RxwikiIcon} width={30} />
-        </IconButton>
-        <Typography
-          component="a"
-          href="/#/"
-          level="title-lg"
-          sx={{ textDecoration: "none" }}
-        >
-          RxsendWN
-        </Typography>
-        <CssVarsProvider>
-          <ColorSchemeToggle sx={{ ml: "auto" }} />
-        </CssVarsProvider>
-      </Box>
-      <Input
-        size="sm"
-        startDecorator={<SearchRoundedIcon />}
-        placeholder={t("sideBar.search")}
-        onKeyDown={handleKeywordChange}
-        onChange={handelinputKeyword}
-      />
-      <Box
-        sx={{
-          minHeight: 0,
-          overflow: "hidden auto",
-          flexGrow: 1,
+          transition: "transform 0.4s, width 0.4s",
+          zIndex: 10000,
+          height: "100dvh",
+          width: "var(--Sidebar-width)",
+          top: 0,
+          p: 2,
+          flexShrink: 0,
           display: "flex",
           flexDirection: "column",
-          [`& .${listItemButtonClasses.root}`]: {
-            gap: 1.5,
-          },
+          gap: 2,
+          borderRight: "1px solid",
+          borderColor: "divider",
         }}
       >
-        <List
-          size="sm"
+        <GlobalStyles
+          styles={(theme) => ({
+            ":root": {
+              "--Sidebar-width": "220px",
+              [theme.breakpoints.up("lg")]: {
+                "--Sidebar-width": "240px",
+              },
+            },
+          })}
+        />
+        <Box
+          className="Sidebar-overlay"
           sx={{
-            gap: 1,
-            "--List-nestedInsetStart": "30px",
-            "--ListItem-radius": (theme) => theme.vars.radius.sm,
+            position: "fixed",
+            zIndex: 9998,
+            top: 0,
+            left: 0,
+            width: "100vw",
+            height: "100vh",
+            opacity: "var(--SideNavigation-slideIn)",
+            backgroundColor: "var(--joy-palette-background-backdrop)",
+            transition: "opacity 0.4s",
+            transform: {
+              xs: "translateX(calc(100% * (var(--SideNavigation-slideIn, 0) - 1) + var(--SideNavigation-slideIn, 0) * var(--Sidebar-width, 0px)))",
+              lg: "translateX(-100%)",
+            },
+          }}
+          onClick={() => closeSidebar()}
+        />
+        <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
+          <IconButton
+            variant="soft"
+            color="primary"
+            size="sm"
+            component="a"
+            href="/#/"
+          >
+            <img src={RxwikiIcon} width={30} />
+          </IconButton>
+          <Typography
+            component="a"
+            href="/#/"
+            level="title-lg"
+            sx={{ textDecoration: "none" }}
+          >
+            RxsendWN
+          </Typography>
+          <CssVarsProvider>
+            <ColorSchemeToggle sx={{ ml: "auto" }} />
+          </CssVarsProvider>
+        </Box>
+        <Input
+          size="sm"
+          startDecorator={<SearchRoundedIcon />}
+          placeholder={t("sideBar.search")}
+          onKeyDown={handleKeywordChange}
+          onChange={handelinputKeyword}
+        />
+        <Box
+          sx={{
+            minHeight: 0,
+            overflow: "hidden auto",
+            flexGrow: 1,
+            display: "flex",
+            flexDirection: "column",
+            [`& .${listItemButtonClasses.root}`]: {
+              gap: 1.5,
+            },
           }}
         >
-          <ListItem>
-            <ListItemButton role="menuitem" component="a" href="/#/">
-              <HomeRoundedIcon />
-              <ListItemContent>
-                <Typography level="title-sm">{t("sideBar.Home")}</Typography>
-              </ListItemContent>
-            </ListItemButton>
-          </ListItem>
+          <List
+            size="sm"
+            sx={{
+              gap: 1,
+              "--List-nestedInsetStart": "30px",
+              "--ListItem-radius": (theme) => theme.vars.radius.sm,
+            }}
+          >
+            <ListItem>
+              <ListItemButton role="menuitem" component="a" href="/#/">
+                <HomeRoundedIcon />
+                <ListItemContent>
+                  <Typography level="title-sm">{t("sideBar.Home")}</Typography>
+                </ListItemContent>
+              </ListItemButton>
+            </ListItem>
 
-          <ListItem>
-            <ListItemButton role="menuitem" component="a" href="/#/about">
-              <InfoRounded />
-              <ListItemContent>
-                <Typography level="title-sm">{t("sideBar.About")}</Typography>
-              </ListItemContent>
-            </ListItemButton>
-          </ListItem>
+            <ListItem>
+              <ListItemButton role="menuitem" component="a" href="/#/about">
+                <InfoRounded />
+                <ListItemContent>
+                  <Typography level="title-sm">{t("sideBar.About")}</Typography>
+                </ListItemContent>
+              </ListItemButton>
+            </ListItem>
 
-          <ListItem>
-            <ListItemButton role="menuitem" component="a" href="/#/siteIndex">
-              <ListRounded />
-              <ListItemContent>
-                <Typography level="title-sm">{t("sideBar.Index")}</Typography>
-              </ListItemContent>
-            </ListItemButton>
-          </ListItem>
-          <ListItem nested>
-            <Toggler
-              renderToggle={({ open, setOpen }) => (
-                <ListItemButton onClick={() => setOpen(!open)}>
-                  <LanguageRounded />
-                  <ListItemContent>
-                    <Typography level="title-sm">
-                      {t("sideBar.changeLang")}
-                    </Typography>
-                  </ListItemContent>
-                  <KeyboardArrowDownIcon
-                    sx={[
-                      open
-                        ? {
-                            transform: "rotate(180deg)",
-                          }
-                        : {
-                            transform: "none",
-                          },
-                    ]}
-                  />
-                </ListItemButton>
-              )}
-            >
-              <Snackbar
-                autoHideDuration={3000}
-                open={open}
-                variant="outlined"
-                color="success"
-                onClose={(event, reason) => {
-                  if (reason === "clickaway") {
-                    return;
-                  }
-                  setOpen(false);
-                }}
-                startDecorator={<LanguageRounded />}
+            <ListItem>
+              <ListItemButton role="menuitem" component="a" href="/#/siteIndex">
+                <ListRounded />
+                <ListItemContent>
+                  <Typography level="title-sm">{t("sideBar.Index")}</Typography>
+                </ListItemContent>
+              </ListItemButton>
+            </ListItem>
+            <ListItem nested>
+              <Toggler
+                renderToggle={({ open, setOpen }) => (
+                  <ListItemButton onClick={() => setOpen(!open)}>
+                    <TranslateRounded />
+                    <ListItemContent>
+                      <Typography level="title-sm">
+                        {t("sideBar.changeLang")}
+                      </Typography>
+                    </ListItemContent>
+                    <KeyboardArrowDownIcon
+                      sx={[
+                        open
+                          ? {
+                              transform: "rotate(180deg)",
+                            }
+                          : {
+                              transform: "none",
+                            },
+                      ]}
+                    />
+                  </ListItemButton>
+                )}
               >
-                {lngs[i18n.resolvedLanguage].nativeName}
-              </Snackbar>
-              <List sx={{ gap: 0.5 }}>
-                {Object.keys(lngs).map((lng) => (
-                  <ListItem key={lng}>
+                <List sx={{ gap: 0.5 }}>
+                  {Object.keys(lngs).map((lng) => (
+                    <ListItem key={lng}>
+                      <ListItemButton
+                        role="menuitem"
+                        value={lng}
+                        onClick={(event) => {
+                          i18n.changeLanguage(
+                            event.currentTarget.getAttribute("value")
+                          );
+                          setOpen(true);
+                        }}
+                      >
+                        <ListItemContent>
+                          <Typography
+                            level="title-sm"
+                            key={lng}
+                            value={lng}
+                            label={lngs[lng].nativeName}
+                            style={{
+                              fontWeight:
+                                i18n.resolvedLanguage === lng
+                                  ? "bold"
+                                  : "normal",
+                            }}
+                          >
+                            {lngs[lng].nativeName}
+                          </Typography>
+                        </ListItemContent>
+                      </ListItemButton>
+                    </ListItem>
+                  ))}
+                </List>
+              </Toggler>
+            </ListItem>
+            <ListDivider />
+
+            <ListItem nested>
+              <Toggler
+                renderToggle={({ open, setOpen }) => (
+                  <ListItemButton onClick={() => setOpen(!open)}>
+                    <AllOutRounded />
+                    <ListItemContent>
+                      <Typography level="title-sm">
+                        {t("sideBar.Factions")}
+                      </Typography>
+                    </ListItemContent>
+                    <KeyboardArrowDownIcon
+                      sx={[
+                        open
+                          ? {
+                              transform: "rotate(180deg)",
+                            }
+                          : {
+                              transform: "none",
+                            },
+                      ]}
+                    />
+                  </ListItemButton>
+                )}
+              >
+                <List sx={{ gap: 0.5 }}>
+                  <ListItem
+                    key="1"
+                    component="a"
+                    href="/#/factions/Class-D"
+                    sx={{ textDecoration: "inherit" }}
+                  >
+                    <img
+                      src="/img/class_d.png"
+                      width={23}
+                      style={{ zIndex: "1000" }}
+                    />
                     <ListItemButton
-                      role="menuitem"
-                      value={lng}
-                      onClick={(event) => {
-                        i18n.changeLanguage(
-                          event.currentTarget.getAttribute("value")
-                        );
-                        setOpen(true);
+                      sx={{
+                        color: "#754214",
                       }}
                     >
-                      <ListItemContent>
-                        <Typography
-                          level="title-sm"
-                          key={lng}
-                          value={lng}
-                          label={lngs[lng].nativeName}
-                          style={{
-                            fontWeight:
-                              i18n.resolvedLanguage === lng ? "bold" : "normal",
-                          }}
-                        >
-                          {lngs[lng].nativeName}
-                        </Typography>
-                      </ListItemContent>
+                      Class-d
                     </ListItemButton>
                   </ListItem>
-                ))}
-              </List>
-            </Toggler>
-          </ListItem>
-          <ListDivider />
-
-          <ListItem nested>
-            <Toggler
-              renderToggle={({ open, setOpen }) => (
-                <ListItemButton onClick={() => setOpen(!open)}>
-                  <AllOutRounded />
-                  <ListItemContent>
-                    <Typography level="title-sm">
-                      {t("sideBar.Factions")}
-                    </Typography>
-                  </ListItemContent>
-                  <KeyboardArrowDownIcon
-                    sx={[
-                      open
-                        ? {
-                            transform: "rotate(180deg)",
-                          }
-                        : {
-                            transform: "none",
-                          },
-                    ]}
-                  />
-                </ListItemButton>
-              )}
-            >
-              <List sx={{ gap: 0.5 }}>
-                <ListItem
-                  key="1"
-                  component="a"
-                  href="/#/factions/Class-D"
-                  sx={{ textDecoration: "inherit" }}
-                >
-                  <img
-                    src="/img/class_d.png"
-                    width={23}
-                    style={{ zIndex: "1000" }}
-                  />
-                  <ListItemButton
-                    sx={{
-                      color: "#754214",
-                    }}
-                  >
-                    Class-d
-                  </ListItemButton>
-                </ListItem>
-              </List>
-            </Toggler>
-          </ListItem>
-        </List>
-        <List
-          size="sm"
-          sx={{
-            mt: "auto",
-            flexGrow: 0,
-            "--ListItem-radius": (theme) => theme.vars.radius.sm,
-            "--List-gap": "8px",
-            mb: 2,
-          }}
-        >
-          <ListItem>
-            <ListItemButton>
-              <SupportRoundedIcon />
-              {t("sideBar.Support")}
-            </ListItemButton>
-          </ListItem>
-        </List>
-        <Card
-          invertedColors
-          variant="soft"
-          color="warning"
-          size="sm"
-          sx={{ boxShadow: "none" }}
-        >
-          <Stack
-            direction="row"
-            sx={{ justifyContent: "space-between", alignItems: "center" }}
+                </List>
+              </Toggler>
+            </ListItem>
+          </List>
+          <List
+            size="sm"
+            sx={{
+              mt: "auto",
+              flexGrow: 0,
+              "--ListItem-radius": (theme) => theme.vars.radius.sm,
+              "--List-gap": "8px",
+              mb: 2,
+            }}
           >
-            <Typography level="title-sm">{t("msgType.warning")}</Typography>
-          </Stack>
-          <Typography level="body-xs">
-            {t("sideBar.RWDunderConstruct")}
-          </Typography>
-          <LinearProgress variant="outlined" sx={{ my: 1 }} />
-        </Card>
-      </Box>
-      <Divider />
-      <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
-        <Box sx={{ minWidth: 0, flex: 1 }}>
-          <Typography level="title-sm">
-            {t("sideBar.SiteUnder")}{" "}
-            <a
-              href="https://creativecommons.org/licenses/by-nc-sa/4.0/"
-              style={{
-                textDecoration: "none",
-                color: "inherit",
-              }}
+            <ListItem>
+              <ListItemButton>
+                <SupportRoundedIcon />
+                {t("sideBar.Support")}
+              </ListItemButton>
+            </ListItem>
+          </List>
+          <Card
+            invertedColors
+            variant="soft"
+            color="warning"
+            size="sm"
+            sx={{ boxShadow: "none" }}
+          >
+            <Stack
+              direction="row"
+              sx={{ justifyContent: "space-between", alignItems: "center" }}
             >
-              CC BY-NC-SA
-            </a>
-          </Typography>
-          <Typography level="body-xs">{t("sideBar.MadeBy")}</Typography>
+              <Typography level="title-sm">{t("msgType.warning")}</Typography>
+            </Stack>
+            <Typography level="body-xs">
+              {t("sideBar.RWDunderConstruct")}
+            </Typography>
+            <LinearProgress variant="outlined" sx={{ my: 1 }} />
+          </Card>
         </Box>
-      </Box>
-    </Sheet>
+        <Divider />
+        <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
+          <Box sx={{ minWidth: 0, flex: 1 }}>
+            <Typography level="title-sm">
+              {t("sideBar.SiteUnder")}{" "}
+              <a
+                href="https://creativecommons.org/licenses/by-nc-sa/4.0/"
+                style={{
+                  textDecoration: "none",
+                  color: "inherit",
+                }}
+              >
+                CC BY-NC-SA
+              </a>
+            </Typography>
+            <Typography level="body-xs">{t("sideBar.MadeBy")}</Typography>
+          </Box>
+        </Box>
+      </Sheet>
+      <Snackbar
+        autoHideDuration={3000}
+        open={open}
+        variant="outlined"
+        color="success"
+        onClose={(event, reason) => {
+          if (reason === "clickaway") {
+            return;
+          }
+          setOpen(false);
+        }}
+        startDecorator={
+          <>
+            <ChangeCircleRounded />
+            <TranslateRounded />
+          </>
+        }
+      >
+        {lngs[i18n.resolvedLanguage].nativeName}
+      </Snackbar>
+    </>
   );
 }
