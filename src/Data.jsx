@@ -16,6 +16,7 @@ const resources = {
         MadeBy: "♡粉丝制作",
         changeLang: "更换语言",
         search: "搜索",
+        Print: "打印本页",
       },
       pageHome: {
         blueTitle: "认识更多的力量",
@@ -105,6 +106,7 @@ GOC间谍不会变更阵营，尽管他们会获得制服，但仍会失去匕�
         MadeBy: "♡ Фанатский проект",
         changeLang: "Сменить язык",
         search: "Поиск",
+        Print: "Распечатать страницу",
       },
       pageHome: {
         blueTitle: "Познай множество сил",
@@ -191,6 +193,7 @@ GOC间谍不会变更阵营，尽管他们会获得制服，但仍会失去匕�
         MadeBy: "♡ Fan-made Project",
         changeLang: "Change Language",
         search: "Search",
+        Print: "Print this page",
       },
       pageHome: {
         blueTitle: "Know the Many Forces",

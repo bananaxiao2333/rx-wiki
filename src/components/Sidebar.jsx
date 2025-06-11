@@ -26,10 +26,12 @@ import {
   InfoRounded,
   TranslateRounded,
   ListRounded,
+  PrintRounded,
 } from "@mui/icons-material";
 import ColorSchemeToggle from "./ColorSchemeToggle";
 import { CssVarsProvider, ListDivider, Snackbar } from "@mui/joy";
 import { useTranslation } from "react-i18next";
+import { useReactToPrint } from "react-to-print";
 
 function Toggler({ defaultExpanded = false, renderToggle, children }) {
   const [open, setOpen] = React.useState(defaultExpanded);
@@ -54,7 +56,7 @@ function Toggler({ defaultExpanded = false, renderToggle, children }) {
   );
 }
 
-export default function Sidebar() {
+export default function Sidebar({ reactToPrintFn }) {
   const [open, setOpen] = React.useState(false);
   const [inputKeyword, setinputKeyword] = React.useState("");
   const handelinputKeyword = (event) => {
@@ -323,6 +325,12 @@ export default function Sidebar() {
               <ListItemButton>
                 <SupportRoundedIcon />
                 {t("sideBar.Support")}
+              </ListItemButton>
+            </ListItem>
+            <ListItem>
+              <ListItemButton onClick={reactToPrintFn}>
+                <PrintRounded />
+                {t("sideBar.Print")}
               </ListItemButton>
             </ListItem>
           </List>

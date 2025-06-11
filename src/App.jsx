@@ -111,59 +111,65 @@ function App() {
     fetchFiles();
   }, []);
 
-  return (
-    <HashRouter>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <Box>
-              <RouterBreadcrumbs />
-              <HomeHero />
-            </Box>
-          }
-        />
-        <Route
-          path="/about"
-          element={
-            <Box>
-              <RouterBreadcrumbs />
-              <About />
-            </Box>
-          }
-        />
-        <Route
-          path="/siteIndex"
-          element={
-            <Box>
-              <RouterBreadcrumbs />
-              <SiteIndexPage />
-            </Box>
-          }
-        />
+  const componentRef = React.useRef(null);
 
-        {files.map((file, index) => (
+  return (
+    <div ref={componentRef}>
+      <HashRouter>
+        <Routes>
           <Route
-            path={("/" + file.path).replace(".mdx", "")}
+            path="/"
             element={
               <Box>
                 <RouterBreadcrumbs />
-                <ContentRenderer contentPath={file.path.replace(".mdx", "")} />
+                <HomeHero />
               </Box>
             }
           />
-        ))}
+          <Route
+            path="/about"
+            element={
+              <Box>
+                <RouterBreadcrumbs />
+                <About />
+              </Box>
+            }
+          />
+          <Route
+            path="/siteIndex"
+            element={
+              <Box>
+                <RouterBreadcrumbs />
+                <SiteIndexPage />
+              </Box>
+            }
+          />
 
-        <Route
-          path="/*"
-          element={
-            <Box>
-              <NotFoundPage />
-            </Box>
-          }
-        />
-      </Routes>
-    </HashRouter>
+          {files.map((file, index) => (
+            <Route
+              path={("/" + file.path).replace(".mdx", "")}
+              element={
+                <Box>
+                  <RouterBreadcrumbs />
+                  <ContentRenderer
+                    contentPath={file.path.replace(".mdx", "")}
+                  />
+                </Box>
+              }
+            />
+          ))}
+
+          <Route
+            path="/*"
+            element={
+              <Box>
+                <NotFoundPage />
+              </Box>
+            }
+          />
+        </Routes>
+      </HashRouter>
+    </div>
   );
 }
 

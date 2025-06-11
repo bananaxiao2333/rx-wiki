@@ -1,11 +1,21 @@
 import * as React from "react";
 import { loadMdxFiles } from "./utils/DataManage";
 import { parseMdxFilesBrowser } from "./utils/DataManage";
-import { Card, Sheet, Skeleton, Stack, Typography } from "@mui/joy";
+import {
+  Card,
+  FormControl,
+  FormLabel,
+  Input,
+  Sheet,
+  Skeleton,
+  Stack,
+  Typography,
+} from "@mui/joy";
 import { useTranslation } from "react-i18next";
 import { styled } from "@mui/joy/styles";
 import { useParams } from "react-router-dom";
 import queryString from "query-string";
+import { SearchRounded } from "@mui/icons-material";
 
 const Item = styled(Sheet)(({ theme }) => ({
   ...theme.typography["body-sm"],
@@ -23,9 +33,15 @@ export default function SiteIndexPage() {
   const [files, setFiles] = React.useState([]);
   const { t, i18n } = useTranslation();
 
-  console.log(params);
-
-  var qTip = "";
+  const [inputKeyword, setinputKeyword] = React.useState(params.q ?? "");
+  const handelinputKeyword = (event) => {
+    setinputKeyword(event.target.value);
+  };
+  const handleKeywordChange = (event) => {
+    if (event.keyCode == 13) {
+      window.location.href = "/?q=" + inputKeyword + "#/siteIndex";
+    }
+  };
 
   React.useEffect(() => {
     const fetchFiles = async () => {
@@ -44,7 +60,6 @@ export default function SiteIndexPage() {
         (file) => file.frontmatter.draft !== true
       );
       if (params.q != undefined) {
-        qTip = <Typography level="h2">搜索关键词:{params.q}</Typography>;
         publishedFiles = publishedFiles.filter((file) =>
           t("pages.factions" + file.frontmatter.key + ".description")
             .toLocaleLowerCase()
@@ -63,11 +78,20 @@ export default function SiteIndexPage() {
           style={{
             display: "flex",
             gap: "20px",
+            paddingBottom: "10px",
           }}
         >
-          <Typography level="h2">
-            {t("sideBar.search")}({files.length}): {params.q}
-          </Typography>
+          <FormControl>
+            <FormLabel>{t("sideBar.search")}</FormLabel>
+            <Input
+              size="sm"
+              value={inputKeyword}
+              startDecorator={<SearchRounded />}
+              placeholder={t("sideBar.search")}
+              onKeyDown={handleKeywordChange}
+              onChange={handelinputKeyword}
+            />
+          </FormControl>
         </div>
       ) : (
         ""
