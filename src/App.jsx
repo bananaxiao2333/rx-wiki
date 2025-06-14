@@ -11,6 +11,7 @@ import { useTranslation } from "react-i18next";
 const contentModules = import.meta.glob("./content/**/*.mdx", { eager: false });
 
 import { loadMdxFiles, parseMdxFilesBrowser } from "./utils/DataManage";
+import Home from "./Home";
 
 const components = {
   h1: (props) => <Typography level="h1" {...props} />,
@@ -122,7 +123,7 @@ function App() {
             element={
               <Box>
                 <RouterBreadcrumbs />
-                <HomeHero />
+                <Home />
               </Box>
             }
           />

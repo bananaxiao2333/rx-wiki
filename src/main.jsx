@@ -10,6 +10,9 @@ import loadMdxFiles from "./utils/DataManage";
 import App from "./App.jsx";
 import ReactToPrint from "react-to-print";
 import { useReactToPrint } from "react-to-print";
+import { register } from "swiper/element/bundle";
+
+register();
 
 //TODO: change black to grey black background theme
 

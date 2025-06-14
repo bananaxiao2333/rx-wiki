@@ -119,7 +119,7 @@ export default function About() {
                 <Typography level="title-sm">
                   {t("pageAbout.serverDev")}
                 </Typography>
-                <Typography level="body-sm">ragger</Typography>
+                <Typography level="body-sm">shaky</Typography>
               </ListItemContent>
               <CodeRounded color="primary" />
             </ListItemButton>
