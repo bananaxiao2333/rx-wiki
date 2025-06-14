@@ -1,6 +1,7 @@
-import { Box } from "@mui/joy";
+import { Box, Typography } from "@mui/joy";
 import HomeHero from "./components/HomeHero";
 import "./Home.css";
+import { t } from "i18next";
 
 const imgModules = import.meta.glob("./swiperimg/icon/*", { eager: true });
 const swiperImg = Object.values(imgModules).map((mod) => mod.default);
@@ -18,35 +19,56 @@ export default function Home() {
   return (
     <Box>
       <HomeHero />
-      {Object.keys(swipers).map((swiperName, swiperindex) => (
-        <swiper-container
-          loop
-          slidesPerView="auto"
-          freeMode="true"
-          autoHeight="true"
-          speed={1000}
-          spaceBetween={-50}
-          autoplay={{
-            delay: 0,
-            reverseDirection: swiperindex % 2,
+      <div style={{ position: "relative" }}>
+        <div
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            zIndex: 30, // 确保文字在 Swiper 上方
+            textAlign: "center",
           }}
         >
-          {Object.keys(swipers[swiperName]).map((keyname, index) => (
-            <swiper-slide lazy="true">
-              <img
-                src={swipers[swiperName][index]}
-                loading="lazy"
-                id={index}
-                style={{
-                  width: "100%",
-                  display: "block",
-                  height: "100%",
-                }}
-              />
-            </swiper-slide>
+          <Typography
+            level="h2"
+            fontSize={{ sm: 50, md: 70 }}
+            sx={{ whiteSpace: "pre", WebkitTextStroke: "1px #fff" }}
+          >
+            {t("pageHome.swiper")}
+          </Typography>
+        </div>
+        <div style={{ position: "relative", zIndex: "20" }}>
+          {Object.keys(swipers).map((swiperName, swiperindex) => (
+            <swiper-container
+              loop
+              slidesPerView="auto"
+              freeMode="true"
+              autoHeight="true"
+              speed={1000}
+              spaceBetween={-50}
+              autoplay={{
+                delay: 0,
+                reverseDirection: swiperindex % 2,
+              }}
+            >
+              {Object.keys(swipers[swiperName]).map((keyname, index) => (
+                <swiper-slide lazy="true">
+                  <img
+                    src={swipers[swiperName][index]}
+                    id={index}
+                    loading="lazy"
+                    style={{
+                      display: "block",
+                      width: "200px",
+                    }}
+                  />
+                </swiper-slide>
+              ))}
+            </swiper-container>
           ))}
-        </swiper-container>
-      ))}
+        </div>
+      </div>
     </Box>
   );
 }

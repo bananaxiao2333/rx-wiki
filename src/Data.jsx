@@ -24,6 +24,7 @@ const resources = {
         secondary: "维基的存在，是为了让每回合对局都更有准备，而非盲目混乱。",
         getStarted: "开始",
         viewMateirals: "直接查看资料？",
+        swiper: "众多阵营\n大量角色",
       },
       msgType: {
         warning: "警告",
