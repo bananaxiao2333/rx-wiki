@@ -2,25 +2,14 @@ import { Box } from "@mui/joy";
 import HomeHero from "./components/HomeHero";
 import "./Home.css";
 
-const contentImgModules = import.meta.glob("./swiperimg/icon/*", {
-  eager: false,
-});
-const swiperImg = Object.keys(contentImgModules).map(
-  (keyname, index) => new URL(keyname, import.meta.url).href
-);
+const imgModules = import.meta.glob("./swiperimg/icon/*", { eager: true });
+const swiperImg = Object.values(imgModules).map((mod) => mod.default);
 
 const contentImgCharModules = import.meta.glob("./swiperimg/char/*", {
-  eager: false,
+  eager: true,
 });
-const swiperImgChar = Object.keys(contentImgCharModules).map(
-  (keyname, index) => new URL(keyname, import.meta.url).href
-);
-
-const contentImgItemModules = import.meta.glob("./swiperimg/item/*", {
-  eager: false,
-});
-const swiperItemChar = Object.keys(contentImgItemModules).map(
-  (keyname, index) => new URL(keyname, import.meta.url).href
+const swiperImgChar = Object.values(contentImgCharModules).map(
+  (mod) => mod.default
 );
 
 const swipers = { swiperImg, swiperImgChar };
