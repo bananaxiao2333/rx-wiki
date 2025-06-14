@@ -6,6 +6,9 @@ import remarkParseFrontmatter from "remark-parse-frontmatter";
 
 // https://vite.dev/config/
 export default defineConfig({
+  server: {
+    host: "0.0.0.0",
+  },
   plugins: [
     mdx({
       remarkPlugins: [remarkFrontmatter, remarkParseFrontmatter],

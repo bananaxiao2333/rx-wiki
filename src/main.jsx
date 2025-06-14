@@ -15,10 +15,10 @@ import { useReactToPrint } from "react-to-print";
 
 const root = new createRoot(document.getElementById("root"));
 export function Main() {
-  const componentRef = React.useRef(null);
+  const componentRef = React.useRef();
   const reactToPrintFn = useReactToPrint({
     contentRef: componentRef,
-    documentTitle: "AwesomeFileName",
+    documentTitle: "RxsendWN",
   });
   return (
     <StrictMode>
@@ -28,32 +28,33 @@ export function Main() {
           <Sidebar reactToPrintFn={reactToPrintFn} />
           <Topbar />
           <Box
-            component="main"
-            className="MainContent"
             sx={{
               overflow: "auto",
             }}
           >
-            <div
-              ref={componentRef}
-              style={{
-                padding: 30,
-                pt: { xs: "calc(12px + var(--Header-height))", md: 3 },
-                pb: { xs: 2, sm: 2, md: 3 },
-                flex: 1,
-                display: "flex",
-                flexDirection: "column",
-                minWidth: 0,
-                height: "100dvh",
-                gap: 1,
-                backgroundImage: "url('/rwn-bg.svg')",
-                backgroundAttachment: "fixed",
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "contain",
-                backgroundPosition: "center",
-              }}
-            >
-              <App />
+            <div ref={componentRef}>
+              <Box
+                component="main"
+                className="MainContent"
+                sx={{
+                  pt: { xs: "calc(12px + var(--Header-height))", md: 3 },
+                  pb: { xs: 2, sm: 2, md: 3 },
+                  flex: 1,
+                  display: "flex",
+                  flexDirection: "column",
+                  minWidth: 0,
+                  height: "100dvh",
+                  gap: 1,
+                  padding: 3,
+                  backgroundImage: "url('/rwn-bg.svg')",
+                  backgroundAttachment: "fixed",
+                  backgroundRepeat: "no-repeat",
+                  backgroundSize: "contain",
+                  backgroundPosition: "center",
+                }}
+              >
+                <App />
+              </Box>
             </div>
           </Box>
         </Box>
