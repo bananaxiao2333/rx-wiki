@@ -116,6 +116,7 @@ GOC间谍不会变更阵营，尽管他们会获得制服，但仍会失去匕�
           "Вики нужен, чтобы каждый раунд был подготовленным, а не слепым хаосом.",
         getStarted: "Начать",
         viewMateirals: "Сразу посмотреть материалы?",
+        swiper: "Множество фракций\nОгромное количество персонажей",
       },
       msgType: {
         warning: "Внимание",
@@ -203,6 +204,7 @@ GOC间谍不会变更阵营，尽管他们会获得制服，但仍会失去匕�
           "The wiki exists so every round is prepared, not blind chaos.",
         getStarted: "Get Started",
         viewMateirals: "View Materials Directly?",
+        swiper: "Numerous factions\nAbundant characters",
       },
       msgType: {
         warning: "Warning",

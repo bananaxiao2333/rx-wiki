@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/joy";
 import HomeHero from "./components/HomeHero";
 import "./Home.css";
-import { t } from "i18next";
+import { useTranslation, initReactI18next, Trans } from "react-i18next";
 
 const imgModules = import.meta.glob("./swiperimg/icon/*", { eager: true });
 const swiperImg = Object.values(imgModules).map((mod) => mod.default);
@@ -16,6 +16,7 @@ const swiperImgChar = Object.values(contentImgCharModules).map(
 const swipers = { swiperImg, swiperImgChar };
 
 export default function Home() {
+  const { t, i18n } = useTranslation();
   return (
     <Box>
       <HomeHero />
@@ -32,8 +33,9 @@ export default function Home() {
         >
           <Typography
             level="h2"
-            fontSize={{ sm: 50, md: 70 }}
-            sx={{ whiteSpace: "pre", WebkitTextStroke: "1px #fff" }}
+            fontSize={{ sm: 50, md: 60 }}
+            color="primary"
+            sx={{ whiteSpace: "pre", textWrap: "wrap" }}
           >
             {t("pageHome.swiper")}
           </Typography>
