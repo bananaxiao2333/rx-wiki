@@ -31,10 +31,13 @@ import {
 import ColorSchemeToggle from "./ColorSchemeToggle";
 import { CssVarsProvider, ListDivider, Snackbar } from "@mui/joy";
 import { useTranslation } from "react-i18next";
-import { useReactToPrint } from "react-to-print";
+import { loadMdxFiles } from "../utils/DataManage";
+import { parseMdxFilesBrowser } from "../utils/DataManage";
+import generateDocumentTree from "../utils/DataTree";
 
 function Toggler({ defaultExpanded = false, renderToggle, children }) {
   const [open, setOpen] = React.useState(defaultExpanded);
+
   return (
     <React.Fragment>
       {renderToggle({ open, setOpen })}
@@ -68,12 +71,37 @@ export default function Sidebar({ reactToPrintFn }) {
     }
   };
 
+  const [files, setFiles] = React.useState([]);
   const { t, i18n } = useTranslation();
+
+  React.useEffect(() => {
+    const fetchFiles = async () => {
+      const mdxFiles = await loadMdxFiles();
+
+      // 2. 解析文件
+      const parsedFiles = await parseMdxFilesBrowser(mdxFiles);
+
+      // 3. 验证数据类型
+      if (!Array.isArray(parsedFiles)) {
+        throw new Error("解析后数据不是数组");
+      }
+
+      // 4. 过滤草稿
+      var publishedFiles = parsedFiles.filter(
+        (file) => file.frontmatter.draft !== true
+      );
+      setFiles(publishedFiles);
+    };
+
+    fetchFiles();
+  }, []);
+
   const lngs = {
     zh: { nativeName: "中文" },
     ru: { nativeName: "Русский язык" },
     en: { nativeName: "English" },
   };
+
   return (
     <>
       <Sheet
@@ -325,12 +353,6 @@ export default function Sidebar({ reactToPrintFn }) {
               <ListItemButton>
                 <SupportRoundedIcon />
                 {t("sideBar.Support")}
-              </ListItemButton>
-            </ListItem>
-            <ListItem>
-              <ListItemButton onClick={reactToPrintFn}>
-                <PrintRounded />
-                {t("sideBar.Print")}
               </ListItemButton>
             </ListItem>
           </List>

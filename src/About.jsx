@@ -51,11 +51,7 @@ export default function About() {
             zIndex: 9995,
           }}
         >
-          <Typography
-            level="h2"
-            fontWeight="xl"
-            sx={{ backgroundColor: "divider" }}
-          >
+          <Typography level="h2" fontWeight="xl">
             <Box component="span" color="text.primary">
               Rxsend
             </Box>
@@ -119,7 +115,7 @@ export default function About() {
                 <Typography level="title-sm">
                   {t("pageAbout.serverDev")}
                 </Typography>
-                <Typography level="body-sm">shaky</Typography>
+                <Typography level="body-sm">ragger</Typography>
               </ListItemContent>
               <CodeRounded color="primary" />
             </ListItemButton>

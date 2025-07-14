@@ -28,7 +28,7 @@ export function Main() {
       <CssVarsProvider disableTransitionOnChange>
         <CssBaseline />
         <Box sx={{ display: "flex", minHeight: "100dvh" }}>
-          <Sidebar reactToPrintFn={reactToPrintFn} />
+          <Sidebar />
           <Topbar />
           <Box
             sx={{

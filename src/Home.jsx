@@ -3,6 +3,8 @@ import HomeHero from "./components/HomeHero";
 import "./Home.css";
 import { useTranslation, initReactI18next, Trans } from "react-i18next";
 
+{
+  /*
 const imgModules = import.meta.glob("./swiperimg/icon/*", { eager: true });
 const swiperImg = Object.values(imgModules).map((mod) => mod.default);
 
@@ -14,12 +16,15 @@ const swiperImgChar = Object.values(contentImgCharModules).map(
 );
 
 const swipers = { swiperImg, swiperImgChar };
+*/
+}
 
 export default function Home() {
   const { t, i18n } = useTranslation();
   return (
     <Box>
       <HomeHero />
+      {/*
       <div style={{ position: "relative" }}>
         <div
           style={{
@@ -71,6 +76,7 @@ export default function Home() {
           ))}
         </div>
       </div>
+      */}
     </Box>
   );
 }
