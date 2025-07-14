@@ -33,7 +33,6 @@ import { CssVarsProvider, ListDivider, Snackbar } from "@mui/joy";
 import { useTranslation } from "react-i18next";
 import { loadMdxFiles } from "../utils/DataManage";
 import { parseMdxFilesBrowser } from "../utils/DataManage";
-import generateDocumentTree from "../utils/DataTree";
 
 function Toggler({ defaultExpanded = false, renderToggle, children }) {
   const [open, setOpen] = React.useState(defaultExpanded);
